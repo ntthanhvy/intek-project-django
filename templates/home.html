@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title%}Home{% endblock %}
+
+{% block nav %}
+<div class="container ml-auto d-flex justify-content-end">
+{% if user.is_authenticated %}
+    <h6 class="ml-auto mr-3"><a href="{% url 'logout' %}">Logout</a></h6>
+    <h6>Hello {{ user.username }}</h6>
+    
+    {% else %}
+    <h6>You're not loged in</h6>
+    <h6 class="ml-4"><a href="{% url 'login' %}">Login</a></h6>
+    {% endif %}
+</div>
+{% endblock %}
+
+
+{% block content %}
+
+{% endblock %}

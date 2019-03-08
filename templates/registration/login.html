@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% load add_attr %}
+
+{% block title %}Login{% endblock %}
+
+
+{% block content %}
+<div class="row d-flex justify-content-center mt-5">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <h2>Login</h2>
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="username" class="col-lg-10 col-form-label">Username</label>
+                        <div class="col-lg-10">
+                            {{ form.username|add_attr:"class:form-control"}}
+                        </div>
+                    </div>
+                    {% if form.error_messages.values %}
+                        <div class="col-lg-10">
+                            {{ forms.error_messages.values }}
+                        </div>
+                    {% endif %}
+                    <div class="form-group">
+                        <label for="password" class="col-lf-10 col-form-label">Password</label>
+                        <div class="col-lg-10">
+                            {{ form.password|add_attr:"class:form-control"}}
+                        </div>
+                    </div>
+                    <div class="col-sm-2 mt-3">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-center mt-5">
+    <div class="col-6">
+        <h5>Dont have account? <a href="{% url 'signup' %}">Signup</a></h5>
+    </div>
+</div>
+
+{% endblock %}

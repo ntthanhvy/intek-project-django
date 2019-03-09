@@ -13,9 +13,7 @@
                 <form method="POST">
                     {% csrf_token %}
                     {% if form.error_message %}
-                        <div class="form-group">
-                            {{ form.error_message|add_attr:"class: text-danger"}}
-                        </div>
+                        <p>Error</p>
                     {% endif %}
 
                     <div class="form-group">

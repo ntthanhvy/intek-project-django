@@ -1,4 +1,4 @@
-{% extend 'home.html' %}
+{% extends 'home.html' %}
 
 {% load static %}
 
@@ -13,3 +13,9 @@ this will views out user info, include:
     - change info link
     
 '''
+
+{% block title %}Account {{ user.username }}{% endblock %}
+
+{% block content %}
+    <h4>This is the user page</h4>
+{% endblock %}

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views import View
+from django.views.generic import TemplateView
 from .forms import ActorForm, MovieForm
 # Create your views here.
 
@@ -35,3 +36,16 @@ class AddMovies(View):
             return HttpResponse('Saved')
         else:
             return HttpResponse('Not validate')
+
+
+class MovieView(TemplateView):
+    template_name = 'movie.html'
+
+
+class ActorView(TemplateView):
+    template_name = 'actor.html'
+
+
+class AwardView(TemplateView):
+    template_name = 'award.html'
+    

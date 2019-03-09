@@ -3,19 +3,50 @@
 {% block title%}Home{% endblock %}
 
 {% block nav %}
-<div class="container ml-auto d-flex justify-content-end">
-{% if user.is_authenticated %}
-    <h6 class="ml-auto mr-3"><a href="{% url 'logout' %}">Logout</a></h6>
-    <h6>Hello {{ user.username }}</h6>
-    
-    {% else %}
-    <h6>You're not loged in</h6>
-    <h6 class="ml-4"><a href="{% url 'login' %}">Login</a></h6>
-    {% endif %}
-</div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="container mr-auto">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            {% if user.is_authenticated %}
+                <ul class="navbar-nav d-flex justify-content-around">
+                    <li class="nav-item">
+                        <a href="{% url 'intekimdb:movie' %}" class="nav-link">Movies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'intekimdb:actor' %}" class="nav-link">Actors</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'intekimdb:award' %}" class="nav-link">Awards</a>
+                    </li>
+                    <li class="nav-item">
+                        <h6 class="mr-3"><a href="{% url 'logout' %}">Logout</a></h6>
+                    </li>
+                    <li class="nav-item">
+                        <h6><a href="{% url 'account' %}">{{ user.username }}</a></h6>
+                    </li>
+                </ul>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}
 
 
 {% block content %}
-
+{% if user.is_authenticated %}
+    <div class="container">
+        <a href="{% url 'intekimdb:movie' %}">
+            <div class="card">
+                <h2>START EXPLORE THE SITE</h2>
+            </div>
+        </a>
+    </div>
+{% else %}
+    <div class="container">
+        <div class="card-box">
+            <a href="{% url 'login' %}" class="btn btn-primary"><h3>LOG IN</h3></a>
+            <a href="{% url 'signup' %}" class="btn btn-primary"><h3>SIGN UP</h3></a>
+        </div>
+    </div>
+{% endif %}
 {% endblock %}

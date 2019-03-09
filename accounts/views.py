@@ -11,5 +11,5 @@ class Signup(generic.CreateView):
     template_name = 'signup.html'
 
 
-class UserView(generic.CreateView):
+class UserView(generic.TemplateView):
     template_name = 'user.html'

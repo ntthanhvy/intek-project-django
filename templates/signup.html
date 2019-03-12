@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load add_attr %}
+{% load add_attr_str %}
 
 {% block title %}Signup{% endblock %}
 
@@ -12,27 +13,36 @@
                 <h2>Sign up</h2>
                 <form method="POST">
                     {% csrf_token %}
-                    {% if form.error_message %}
-                        <p>Error</p>
-                    {% endif %}
-
                     <div class="form-group">
                         <label for="id_username" class="col-lg-10 col-form-label">Username</label>
                         <div class="col-lg-10">
                             {{ form.username|add_attr:"class:form-control"}}
                         </div>
+                        <p class="form-label col-lg-10 mt-2" style="font-size:13px"><i class="text-danger">
+                            {{ form.username.errors.as_text}}
+                        </i></p>
                     </div>
                     <div class="form-group">
                         <label for="id_password1" class="col-lg-10 col-form-label">Password</label>
                         <div class="col-lg-10">
                             {{ form.password1|add_attr:"class:form-control"}}
                         </div>
+                        <p class="form-label col-lg-10 mt-2" style="font-size:13px"><i class="text-danger">
+                                {{ form.password1.errors.as_ul }}
+                            </i></p>
                     </div>
                     <div class="forms-group">
                         <label for="id_password2" class="col-lg-10 col-form-label">Comfirm password</label>
                         <div class="col-lg-10">
                             {{ form.password2|add_attr:"class:form-control"}}
                         </div>
+                        <ul class="list-group col-lg-10 col-form-label">
+                            {% for error in form.password2.errors %}
+                            <li class="list-group-item text-danger font-italic border-0 pt-0" style="font-size:13px">
+                                * {{ error }}
+                            </li>
+                            {% endfor %}
+                        </ul>
                     </div>
                     <div class="col-sm-2 mt-3">
                         <button type="submit" class="btn btn-primary">Submit</button>

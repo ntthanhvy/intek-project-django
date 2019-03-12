@@ -1,0 +1,80 @@
+{% extends "intekimdb/base.html" %}
+{% block head %}
+<script>
+        $( function() {
+          $( "#id_release_date" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "1900:2020",
+          });
+        } );
+        </script>
+{% endblock %}
+{% block content %}
+  <div class="card border-0 bg-light">
+    <div class="card-body">
+      <h2 class="text-center mb-4">Add new Movie</h2>
+      <form method="post" enctype="multipart/form-data">{% csrf_token %}
+        <div class="form-group row">
+          <label for="id_title" class="col-sm-2 col-form-label">
+            Movie title
+          </label>
+          <div class="col-sm-10">
+            {{ form.title|add_attr:"class:form-control" }}
+          </div>
+          {{ form.title.errors }}
+        </div>
+        <div class="form-group row">
+          <label for="id_title" class="col-sm-2 col-form-label">
+            Description
+          </label>
+          <div class="col-sm-10" height="20px">
+            {{ form.description|add_attr:"class:form-control" }}
+          </div>
+          {{ form.description.errors }}
+        </div>
+        <div class="form-group row">
+          <label for="id_release_day" class="col-sm-2 col-form-label">
+            Release day
+          </label>
+          <div class="col-sm-10">
+            {{ form.release_date|add_attr:"class:input-date form-control" }}
+          </div>
+          {{ form.release_date.errors }}
+        </div>
+        <div class="form-group row">
+            <label for="id_title" class="col-sm-2 col-form-label">
+              Category
+            </label>
+            <div class="col-sm-10">
+              {{ form.category|add_attr:"class:custom-select" }}
+            </div>
+            {{ form.category.errors }}
+        </div>
+        <div class="form-group row">
+          <label for="id_title" class="col-sm-2 col-form-label">
+            Actors
+          </label>
+          <div class="col-sm-10">
+            {{ form.actors|add_attr:"class:form-control" }}
+          </div>
+          {{ form.actors.errors }}
+        </div>
+        <div class="form-group row">
+          <label for="id_title" class="col-sm-2 col-form-label">
+            Logo
+          </label>
+          <div class="col-sm-10">
+            {{ form.logo|add_attr:"class:form-control" }}
+          </div>
+          {{ form.logo.errors }}
+        </div>
+        <div class="row">
+          <button class="mt-5 btn btn-primary mx-auto col-sm-6">
+            <h4 class="mb-0 mx-auto">SAVE</h4>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}    

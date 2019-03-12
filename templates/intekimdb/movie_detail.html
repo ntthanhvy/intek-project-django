@@ -1,0 +1,32 @@
+{% extends "home.html" %}
+{% load add_attr %}
+
+{% block title %}Movie{% endblock %}
+
+{% block content %}
+{% if object %}
+    <img src="{{movie.logo.url}}"  height="500" width="500"> 
+    <p>{{ movie.title }}</p>
+    <p>{{ movie.description }}</p>
+    <p>{{ movie.release_date.date }}</p>
+    <p>{% for i in movie.category.all %}
+        {{ i.name }}
+        {% endfor %}
+    </p>
+    <p>{% for i in movie.actors.all %}
+        {{ i.firstname }} {{ i.lastname }}
+        {% endfor %}</p>
+        
+    <a href="{% url 'intekimdb:movie_update' movie.id %}">
+        <div class="btn btn-primary">
+            <h3>Edit movie </h3>
+        </div>
+    </a>
+    <a href="{% url 'intekimdb:movie_delete' movie.id %}">
+        <div class="btn btn-danger">
+            <h3>Delete movie </h3>
+        </div>
+    </a>
+
+{% endif %}
+{% endblock %}   

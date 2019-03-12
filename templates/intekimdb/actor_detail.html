@@ -1,0 +1,15 @@
+{% extends "home.html" %}
+{% block content %}
+{% if object %}
+        <a href="{% url 'intekimdb:actor_update' actor.id %}"> edit </a>
+        <p>{{ object.firstname }}</p>
+        <p>{{ object.lastname }}</p>
+        <p>{{ object.birthday.date }}</p>
+        <p>{{ object.sex }}</p>
+        <p>{{ object.nationality }}</p>
+        <p>{{ object.alive }}</p>
+        <a href="{% url 'intekimdb:actor_delete' actor.id %}"> delete </a>
+
+{% endif %}
+{% endblock %}   
+

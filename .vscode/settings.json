@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "django/bin/python3.5"
+    "python.pythonPath": "django-env/bin/python",
+    "git.ignoreLimitWarning": true
 }

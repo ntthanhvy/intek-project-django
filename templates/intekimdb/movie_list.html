@@ -1,0 +1,49 @@
+{% extends "home.html" %}
+{% load add_attr %}
+
+
+{% block title %}Movies{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center mb-3">
+        <h1 class="font-weight-bold text-uppercase">Movies</h1>
+    </div>
+    <div class="row mb-5">
+        <div class="col-3 ml-auto">
+            <a href="{% url 'intekimdb:movie_create' %}">
+                <div class="btn btn-success">
+                    <h3 class="text-dark mb-0">ADD MOVIE</h3>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="row mt-4">
+        {% for movie in object_list %}
+            <div class="col-4 d-flex justify-content-center mb-3">
+                <div class="card">
+                    <img src="{{ movie.logo.url }}" alt="movie_logo" class="card-img-top">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ movie.title }}</h3>
+                        <p class="card-text">{{ movie.description }}</p>
+                        <p class="card-text ">Release date: {{ movie.release_day }}</p>
+                        <p>{% for cate in movie.category.all %}
+                            #{{ cate }} 
+                            {% endfor %}</p>
+                        <p>
+                            {% for actor in movie.actors.all %}
+                                {{ actor.firstname }} {{ actor.lastname }}, 
+                            {% endfor %}
+                        </p>
+                        <a href="{% url 'intekimdb:movie_detail' movie.id %}" class="card-link">
+                            <p>>>Read more</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}   
+
+
+
+

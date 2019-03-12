@@ -1,0 +1,84 @@
+{% extends "home.html" %}
+{% load add_attr %}
+
+{% block title %}Actor{% endblock %}
+
+
+
+{% block content %}
+  <div class="card border-0 bg-light">
+    <div class="card-body">
+      <h2 class="text-center mb-4">Add new Actor</h2>
+      <form method="post">{% csrf_token %}
+        <div class="form-group row">
+          <label for="id_firstname" class="col-sm-2 col-form-label">
+            Actor firstname
+          </label>
+          <div class="col-sm-10">
+            {{ form.firstname|add_attr:"class:form-control" }}
+          </div>
+          {{ form.firstname.errors }}
+        </div>
+        <div class="form-group row">
+          <label for="lastname" class="col-sm-2 col-form-label">
+            Actor lastname
+          </label>
+          <div class="col-sm-10">
+            {{ form.lastname|add_attr:"class:form-control" }}
+          </div>
+          {{ form.lastname.errors }}
+        </div>
+        <div class="form-group row">
+          <label for="id_title" class="col-sm-2 col-form-label">
+            Birthday
+          </label>
+          <div class="col-sm-5">
+            {{ form.birthday|add_attr:"class:form-control input-date" }}
+          </div>
+          {{ form.brithday.errors }}
+        </div>
+        <div class="from-group row mb-3">
+          <label for="id_sex" class="col-sm-2 col-form-label">Gender</label>
+          <div class="col-sm-5">
+            {{ form.sex|add_attr:"class:form-control" }}
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="id_nationality" class="col-sm-2 col-form-label">Nationality</label>
+          <div class="col-sm-5">
+            {{ form.nationality|add_attr:"class:form-control"}}
+          </div>
+          {{ form.nationality.errors}}
+        </div>
+        <div class="form-group row">
+          <label for="{{ form.alive.id }}" class="col-sm-2 col-form-label">Alive</label>
+          <div class="col-sm-5 form-check align-content-center">
+            {{ form.alive|add_attr:"class: form-check-input ml-2" }}
+          </div>
+        </div>
+        
+        <div class="row">
+          <button class="mt-5 btn btn-primary mx-auto col-sm-6">
+            <h4 class="mb-0 mx-auto">SAVE</h4>
+          </button>
+        </div>
+        <div class="col-10">
+          {{ form.errors.as_text }}
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}     
+
+{% block js %}
+  <script>
+    $( function() {
+      $( "#id_birthday" ).datepicker({
+        changeMonth: true,
+        changeYear: true,
+        yearRange: "1800:2020",
+        format: "dd/MM/yyyy"
+      });
+    } );
+  </script>
+{% endblock %}

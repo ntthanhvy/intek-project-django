@@ -1,0 +1,52 @@
+{% extends "home.html" %}
+{% load add_attr %}
+
+{% block title %}Actor{% endblock %}
+
+
+{% block content %}
+
+<div class="row mb-3 text-center">
+    <div class="col-7">
+        <h1 class="text-dark font-bold text-center">Actors</h1>
+    </div>
+</div>
+<div class="row mb-3">
+    <div class="col-3 ml-auto">
+        <a href="{% url 'intekimdb:actor_create' %}">
+            <div class="btn btn-success">
+                <h3 class="text-dark mb-0">ADD ACTOR</h3>
+            </div>
+        </a>
+    </div>
+</div>
+<div class="row mb-3 mx-auto justify-content-center">
+    {% for actor in object_list %}
+    <div class="card mb-3 col-10">
+        <a href="{% url 'intekimdb:actor_detail' actor.id%}" class="col-10">
+            <img src="" alt="" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">
+                    {{ actor.firstname}} {{ actor.lastname }}
+                </h5>
+                <p class="card-text">
+                    {{ actor.birthday.date }}
+                    {{ actor.sex }}
+                    {{ actor.nationality }}
+                </p>
+                {% if actor.alive %}
+                <div class="bg-success text-white ml-auto col-sm-5">
+                    <p class="text-right">alive</p>
+                </div>
+                {% else %}
+                <div class="bg-dark text-white">
+                    dead
+                </div>
+                {% endif %}
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}   

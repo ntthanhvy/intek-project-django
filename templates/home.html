@@ -3,50 +3,81 @@
 {% block title%}Home{% endblock %}
 
 {% block nav %}
+{% if user.is_authenticated %}
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="container mr-auto">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            {% if user.is_authenticated %}
-                <ul class="navbar-nav d-flex justify-content-around">
-                    <li class="nav-item">
-                        <a href="{% url 'intekimdb:movie' %}" class="nav-link">Movies</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url 'intekimdb:actor' %}" class="nav-link">Actors</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url 'intekimdb:award' %}" class="nav-link">Awards</a>
-                    </li>
-                    <li class="nav-item">
-                        <h6 class="mr-3"><a href="{% url 'logout' %}">Logout</a></h6>
-                    </li>
-                    <li class="nav-item">
-                        <h6><a href="{% url 'account' %}">{{ user.username }}</a></h6>
-                    </li>
-                </ul>
-            {% endif %}
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="col-6 category">
+            <ul class="navbar-nav d-flex">
+                <li class="nav-item">
+                    <a href="{% url 'intekimdb:movie_list' %}" class="nav-link text-white">Movies</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'intekimdb:actor_list' %}" class="nav-link text-white">Actors</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'intekimdb:award' %}" class="nav-link text-white">Awards</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-4 ml-auto logout">
+            <ul class="navbar-nav d-flex justify-content-end">
+                <li class="nav-item">
+                    <a href="{% url 'account' %}" class="nav-link text-light">{{ user.username }}</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'logout' %}" class="nav-link text-light">Logout</a>
+                </li>
+            </ul>
         </div>
     </div>
+    <script>
+        $(window).on('resize', function() {
+            if ($(window).width <= 992) {
+                $('.category').assClass('mr-auto');
+            }
+        })
+    </script>
+    {% endif %}
 {% endblock %}
 
 
 {% block content %}
 {% if user.is_authenticated %}
-    <div class="container">
-        <a href="{% url 'intekimdb:movie' %}">
-            <div class="card">
-                <h2>START EXPLORE THE SITE</h2>
-            </div>
+    <div class="container m-auto d-flex justify-content-center align-self-center">
+        <a href="{% url 'intekimdb:movie_list' %}" class="btn btn-info">
+            <h2 class="mt-2 mb-2">START EXPLORE THE SITE</h2>
         </a>
     </div>
 {% else %}
-    <div class="container">
-        <div class="card-box">
-            <a href="{% url 'login' %}" class="btn btn-primary"><h3>LOG IN</h3></a>
-            <a href="{% url 'signup' %}" class="btn btn-primary"><h3>SIGN UP</h3></a>
+    <div class="container row align-items-center">
+        <div class="col-6 card-box flex-column d-flex justify-content-around">
+            <a href="{% url 'login' %}" class="btn btn-primary mb-4">
+                <div class="card-body pt-0 pb-0"><h3 class="ml-4 mr-4 mt-2 mb-2">LOG IN</h3></div>
+            </a>
+            <a href="{% url 'signup' %}" class="btn btn-primary">
+                <div class="card-body pt-0 pb-0"><h3 class="ml-4 mr-4 mt-2 mb-2">SIGN UP</h3></div>
+            </a>
         </div>
     </div>
 {% endif %}
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(window).on('resize', function() {
+            if ($(window).width() < 992) {
+                $('.category li').addClass('mx-auto', 'bg-dark');
+                $('.category').addClass('mx-auto');
+                $('.logout').addClass('mx-auto');
+                $('.logout li').addClass('mx-auto');
+            } else {
+                $('.category').removeClass('mx-auto');
+                $('.category li').removeClass('mx-auto');
+                $('.logout').removeClass('mx-auto');
+                $('.logout li').removeClass('mx-auto');
+            }
+        })
+    </script>
 {% endblock %}

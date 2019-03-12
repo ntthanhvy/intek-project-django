@@ -1,4 +1,8 @@
-{% extends "intekimdb/base.html" %}
+{% extends "home.html" %}
+{% load add_attr %}
+
+{% block title %}Movie{% endblock %}
+
 {% block head %}
 <script>
         $( function() {
@@ -10,10 +14,12 @@
         } );
         </script>
 {% endblock %}
+
+
 {% block content %}
   <div class="card border-0 bg-light">
     <div class="card-body">
-      <h2 class="text-center mb-4">Add new Movie</h2>
+      <h2 class="text-center mb-4">Edit Movie</h2>
       <form method="post" enctype="multipart/form-data">{% csrf_token %}
         <div class="form-group row">
           <label for="id_title" class="col-sm-2 col-form-label">

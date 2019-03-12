@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils.timezone import datetime
+from django.utils.timezone import now
 from django.urls import reverse
 # Create your models here.
 
@@ -25,7 +25,7 @@ class Actor(models.Model):
     """
     firstname = models.CharField(max_length=50)
     lastname = models.CharField(max_length=50)
-    birthday = models.DateTimeField(default=datetime.now())
+    birthday = models.DateTimeField(default=now())
     sex = models.CharField(max_length=6,
                            choices=(
                                ('Male', 'Male'),
@@ -54,7 +54,7 @@ class Movie(models.Model):
     """
     title = models.CharField(max_length=100)
     description = models.TextField(max_length=500)
-    release_date = models.DateField(default=datetime.now())
+    release_date = models.DateField(default=now())
     category = models.ManyToManyField(Category)
     actors = models.ManyToManyField(Actor, blank=True)
     logo = models.ImageField(upload_to = 'pic_folder/', default = 'pic_folder/no-img.jpg')

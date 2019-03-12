@@ -1,7 +1,20 @@
-{% extends "intekimdb/base.html" %}
+{% extends "home.html" %}
+{% load add_attr %}
+
+{% block title %}Movie{% endblock %}
+
 {% block content %}
 <form method="post">{% csrf_token %}
-        <p>Are you sure you want to delete "{{ object }}"?</p>
-        <input type="submit" value="Confirm">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-text text-center mb-4">Are you sure you want to delete "{{ object }}"?</h3>
+            <div class="d-flex justify-content-center">
+                <input type="submit" value="CONFIRM" class="btn btn-danger mr-2">
+                <a href="{% url 'intekimdb:movie_list' %}" class="ml-2">
+                    <div class="btn btn-success">RETURN</div>
+                </a>
+            </div>
+        </div>
+    </div>
     </form>
 {% endblock %}   

@@ -9,7 +9,7 @@
 <div class="row justify-content-center mb-5">
     <h1 class="font-weight-bold text-uppercase">Actors</h1>
 </div>
-<div class="row mb-3 mx-auto">
+<div class="card-deck">
     {% for actor in object_list %}
     <div class="col-4">
         <div class="card mb-3">
@@ -21,19 +21,22 @@
                 <p class="card-text">
                     <strong>Gender:</strong> {{ actor.sex }}
                 </p>
-                <a href="{% url 'intekimdb:actor_detail' actor.id %}" class="card-link">
-                    <p>>>Read more</p>
-                </a>
+
                 {% if actor.alive %}
-                    <div class="bg-info col-6 ml-auto rounded">
-                        <h5 class="text-right text-white">ALIVE</h5>
-                    </div>
+                <div class="bg-info col-6 ml-auto rounded">
+                    <h5 class="text-right text-white">ALIVE</h5>
+                </div>
                 {% else %}
-                    <div class="bg-dark col-6 ml-auto rounded">
-                        <h5 class="text-right text-white">DEAD</h5>
-                    </div>
+                <div class="bg-dark col-6 ml-auto rounded">
+                    <h5 class="text-right text-white">DEAD</h5>
+                </div>
                 {% endif %}
             </div>
+            <a href="{% url 'intekimdb:actor_detail' actor.id %}" class="card-link card-footer">
+                <div class=>
+                    <p class="mb-0">> Read more</p>
+                </div>
+            </a>
         </div>
     </div>
     {% endfor %}

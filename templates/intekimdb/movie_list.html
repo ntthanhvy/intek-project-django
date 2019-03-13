@@ -5,27 +5,27 @@
 {% block title %}Movies{% endblock %}
 
 {% block content %}
+<div class="col-10 mx-auto">
     <div class="row justify-content-center mb-5">
         <h1 class="font-weight-bold text-uppercase">Movies</h1>
     </div>
     <div class="card-deck">
         {% for movie in object_list %}
-            <!-- <div class="col-4 d-flex justify-content-center mb-3"> -->
-                <div class="card mb-3">
-                    <img src="{{ movie.logo.url }}" alt="movie_logo" class="card-img-top">
-                    <div class="card-body">
-                        <h3 class="card-title">{{ movie.title }}</h3>
-                        <p class="card-text text-muted" style="font-size: 10px">Release date: {{ movie.release_date }}</p>
-                        <p class="card-text text-muted" style="font-size: 13px">
-                            {% for cate in movie.category.all %}
-                            #{{ cate }} 
-                            {% endfor %}
-                        </p>
-                        <a href="{% url 'intekimdb:movie_detail' movie.id %}" class="card-link">
-                            <p>>> Read more</p>
-                        </a>
-                    </div>
-                </div>
+        <div class="card mb-3">
+            <img src="{{ movie.logo.url }}" alt="movie_logo" class="card-img-top">
+            <div class="card-body">
+                <h3 class="card-title">{{ movie.title }}</h3>
+                <p class="card-text text-muted" style="font-size: 10px">Release date: {{ movie.release_date }}</p>
+                <p class="card-text text-muted" style="font-size: 13px">
+                    {% for cate in movie.category.all %}
+                    #{{ cate }} 
+                    {% endfor %}
+                </p>
+                <a href="{% url 'intekimdb:movie_detail' movie.id %}" class="card-link">
+                    <p>>> Read more</p>
+                </a>
+            </div>
+        </div>
         {% endfor %}
     </div>
     <div class="row mt-5">
@@ -37,6 +37,7 @@
             </a>
         </div>
     </div>
+</div>
 {% endblock %}   
 
 

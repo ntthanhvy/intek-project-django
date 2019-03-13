@@ -5,7 +5,7 @@
     <div class="row justify-content-center mb-5">
         <h1 class="font-weight-bold text-uppercase">Awards</h1>
     </div>
-    <div class="row mt-4">
+    <div class="card-deck">
         {% for award in object_list %}
             <div class="col-4 mb-3">
                 <div class="card">
@@ -24,7 +24,7 @@
                             {% endfor %}
                         </p>
                         <p class="card-text">
-                            {{ award.date }}
+                            {{ award.date.date }}
                         </p>
                         <a href="{% url 'intekimdb:award_detail' award.id %}" class="card-link">
                             <p>>>Read more</p>

@@ -76,11 +76,16 @@
             $( "#id_movies" ).hide();
             $( "#id_movies" ).val('');            
             }
-          else
+          else if (choice == 'Movies')
           {
             $( "#id_actors" ).hide();
             $( "#id_movies" ).show();
             $( "#id_actors" ).val('');
+          }
+          else
+          {
+            $( "#id_actors" ).hide();
+            $( "#id_movies" ).hide();
           }
         });
     });

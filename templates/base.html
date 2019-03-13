@@ -21,7 +21,7 @@
     {% block head %}{% endblock %}
 </head>
 <body class="bg-light">
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-secondary mb-4 pl-5 pr-5">
+    <nav class="navbar fixed-top position-relative navbar-expand-lg navbar-light bg-secondary mb-4 px-5">
         <div class="container col-9">
             <a href="{% url 'home' %}" class="nav-link">
                 <img src="https://cdn.itviec.com/employers/intek-institute-of-applied-technology/logo/w170/ww5hEKU4Gqg385c6WkpmsdiN/intek-institute-of-applied-technology-logo.png" alt="logo" class="navbar-brand" width="60px">
@@ -30,17 +30,17 @@
             {% endblock %}
         </div>
     </nav>
-    <div style="height: 150px"></div>
-    <main class="container flex-wrap">
+
+    <div class="container-fluid my-3">
         {% block content %}
         {% endblock %}
-    </main>
+    </div>
 
-    <footer class="container mt-5 fixed-bottom position-relative" style="height: 50px">
+    <!-- <footer class="container mt-5" style="height: 50px">
         <div class="text-muted text-center align-middle">
             <p>C 2019 INTEKER</p>
         </div>
-    </footer>
+    </footer> -->
     {% block js %}
     {% endblock %}
 </body>

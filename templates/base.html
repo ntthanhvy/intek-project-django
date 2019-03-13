@@ -7,7 +7,8 @@
     <title>
         {% block title%}Django Authentication{% endblock %}
     </title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+ 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
 
@@ -34,6 +35,12 @@
         {% block content %}
         {% endblock %}
     </main>
+
+    <footer class="container mt-5 fixed-bottom position-relative" style="height: 50px">
+        <div class="text-muted text-center align-middle">
+            <p>C 2019 INTEKER</p>
+        </div>
+    </footer>
     {% block js %}
     {% endblock %}
 </body>

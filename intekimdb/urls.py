@@ -16,7 +16,11 @@ urlpatterns = [
     path('movies/<int:pk>/', views.MovieDetailView.as_view(), name='movie_detail'),
     path('movies/<int:pk>/update/', views.MovieUpdate.as_view(), name='movie_update'),
     path('movies/<int:pk>/delete/', views.MovieDelete.as_view(), name='movie_delete'),
-    path('awards/', views.TemplateView.as_view(template_name='award.html'), name='award'),
+    path('awards/', views.AwardListView.as_view(), name='award_list'),
+    path('awards/create/', views.AwardCreate.as_view(), name='award_create'),
+    path('awards/<int:pk>/', views.AwardDetailView.as_view(), name='award_detail'),
+    path('awards/<int:pk>/update/', views.AwardUpdate.as_view(), name='award_update'),
+    path('awards/<int:pk>/delete/', views.AwardDelete.as_view(), name='award_delete'),
  
     # path('addactors/', views.AddActors.as_view(), name='addactors'),
     # path('addmovies/', views.MovieCreate.as_view(), name='addmovies'),

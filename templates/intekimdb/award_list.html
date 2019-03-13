@@ -1,0 +1,50 @@
+{% extends "home.html" %}
+{% load add_attr %}
+
+{% block content %}
+    <div class="row justify-content-center mb-5">
+        <h1 class="font-weight-bold text-uppercase">Awards</h1>
+    </div>
+    <div class="row mt-4">
+        {% for award in object_list %}
+            <div class="col-4 d-flex justify-content-center mb-3">
+                <div class="card">
+                    <!-- <img src="{{ award.logo.url }}" alt="award_logo" class="card-img-top"> -->
+                    <div class="card-body">
+                        <h3 class="card-title">{{ award.name }}</h3>
+                        <p class="card-text">{{ award.kind }}</p>
+                        <p class="card-text">
+                            {% for movie in award.movie.all %}
+                                {{ movie.title }}
+                            {% endfor %}
+                        </p>
+                        <p class="card-text">
+                            {% for actor in award.actor.all %}
+                                {{ actor.firstname }} {{ actor.lastname }}
+                            {% endfor %}
+                        </p>
+                        <p class="card-text">
+                            {{ award.date }}
+                        </p>
+                        <a href="{% url 'intekimdb:award_detail' award.id %}" class="card-link">
+                            <p>>>Read more</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <h4 class="text-muted">
+                No awards yet.
+            </h4>
+        {% endfor %}
+    </div>
+    <div class="row mt-5">
+        <div class="col-3 ml-auto">
+            <a href="{% url 'intekimdb:award_create' %}">
+                <div class="btn btn-success">
+                    <h3 class="text-light mb-0">ADD AWARD</h3>
+                </div>
+            </a>
+        </div>
+    </div>
+{% endblock %}   

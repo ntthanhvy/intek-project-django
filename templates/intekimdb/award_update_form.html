@@ -1,0 +1,49 @@
+{% extends "intekimdb/base.html" %}
+{% block head %}
+<script>
+        $( function() {
+          $( "#id_date" ).datepicker({
+            changeMonth: true,
+            changeYear: true
+          });
+        } );
+        </script>
+{% endblock %}
+{% block content %}
+
+
+<script>
+    $(function() {
+          $( "#id_actors" ).hide();
+          $( "#id_movies" ).hide();
+          $('#id_kind').change(function(){
+            var choice = document.getElementById("id_kind").value;
+            if(choice == 'Actors')
+            {
+              $( "#id_actors" ).show();
+              $( "#id_movies" ).hide();
+              $( "#id_movies" ).val('');            
+              }
+            else
+            {
+              $( "#id_actors" ).hide();
+              $( "#id_movies" ).show();
+              $( "#id_movies" ).val('');
+            }
+          });
+      });
+</script>
+
+<form method="post">{% csrf_token %}
+        <p>{{ form.name }}</p>
+        <p>{{ form.kind }}</p>
+        <p>{{ form.movies }}</p>
+        <p>{{ form.actors }}</p>
+        <p>{{ form.date }}</p>
+        <input type="submit" value="Update">
+    </form>
+{% endblock %}   
+
+
+
+

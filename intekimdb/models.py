@@ -69,3 +69,27 @@ class Movie(models.Model):
     def get_absolute_url(self):
         return reverse('intekimdb:movie_detail', kwargs={'pk': self.pk})
 
+
+class Award(models.Model):
+    """
+    Award model : model for Awards
+    """
+    name = models.CharField(max_length=100)
+
+    CHOICES = (('Movies', 'Movies'),('Actors', 'Actors'),)
+    kind = models.CharField(max_length=6, choices=CHOICES, blank=False)
+
+    actors = models.ManyToManyField(Actor, blank=True)
+    movies = models.ManyToManyField(Movie, blank=True)
+    date = models.DateField(default=now())
+
+
+    class Meta:
+        verbose_name = "Award"
+        verbose_name_plural = "Awards"
+
+    def __str__(self):
+        return self.name
+        
+    def get_absolute_url(self):
+        return reverse('intekimdb:award_detail', kwargs={'pk': self.pk})

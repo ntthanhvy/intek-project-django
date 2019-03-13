@@ -8,7 +8,7 @@
             <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <div class="col-6 category">
+        <div class="col-6 category" id="nav-list">
             <ul class="navbar-nav d-flex">
                 <li class="nav-item">
                     <a href="{% url 'intekimdb:movie_list' %}" class="nav-link text-white">Movies</a>
@@ -17,7 +17,7 @@
                     <a href="{% url 'intekimdb:actor_list' %}" class="nav-link text-white">Actors</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{% url 'intekimdb:award' %}" class="nav-link text-white">Awards</a>
+                    <a href="{% url 'intekimdb:award_list' %}" class="nav-link text-white">Awards</a>
                 </li>
             </ul>
         </div>
@@ -32,12 +32,22 @@
             </ul>
         </div>
     </div>
+    
     <script>
-        $(window).on('resize', function() {
-            if ($(window).width <= 992) {
-                $('.category').assClass('mr-auto');
+        $(function() {
+            if ($(window).width() < 992) {
+                $('#nav-list').addClass('justify-content-end');
+                $("#nav-list").addClass('ml-auto');
+                $("#nav-list").addClass('col-4');
+                $("#nav-list").removeClass('col-6');
+                $(".nav-link").addClass('text-right');
+            } else if ($(window).width() >= 992) {
+                $('.nav-link').removeClass('text-right');
+                $('#nav-list').addClass('col-6');
+                $('#nav-list').removeClass('col-4');
+
             }
-        })
+        });
     </script>
     {% endif %}
 {% endblock %}
@@ -65,19 +75,4 @@
 {% endblock %}
 
 {% block js %}
-    <script>
-        $(window).on('resize', function() {
-            if ($(window).width() < 992) {
-                $('.category li').addClass('mx-auto', 'bg-dark');
-                $('.category').addClass('mx-auto');
-                $('.logout').addClass('mx-auto');
-                $('.logout li').addClass('mx-auto');
-            } else {
-                $('.category').removeClass('mx-auto');
-                $('.category li').removeClass('mx-auto');
-                $('.logout').removeClass('mx-auto');
-                $('.logout li').removeClass('mx-auto');
-            }
-        })
-    </script>
 {% endblock %}

@@ -7,47 +7,54 @@
 {% block content %}
 
 {% if object %}
-<div class="col-8 mx-auto">
+<div class="col-10 mx-auto">
     <div class="card">
-        <img src="{{ movie.logo.url }}"  class="card-img-top"> 
-        <div class="card-body">
-            <h2 class="card-head mb-3">{{ actor.firstname }} {{ actor.lastname }}</h2>
-            <p class="card-text">
-                <strong>Birthday:</strong> {{ actor.birthday.date }}
-            </p>
-            <p class="card-text">
-                <strong>Gender:</strong> {{ actor.sex }}
-            </p>
-            <p class="card-text">
-                <strong>Nationality:</strong> {{ actor.nationality }}
-            </p>
-            <p class="card-text">
-                    <strong>Movies: </strong>
-                    {% for movie in actor.movies.all %}
+        <div class="row no-gutters">
+
+            <div class="col-4">
+                <img src="{{ actor.portrait.url }}"  class="card-img"> 
+            </div>
+            <div class="col-8">
+                <div class="card-body">
+                    <h2 class="card-head mb-3">{{ actor.firstname }} {{ actor.lastname }}</h2>
+                    <p class="card-text">
+                        <strong>Birthday:</strong> {{ actor.birthday.date }}
+                    </p>
+                    <p class="card-text">
+                        <strong>Gender:</strong> {{ actor.sex }}
+                    </p>
+                    <p class="card-text">
+                        <strong>Nationality:</strong> {{ actor.nationality }}
+                    </p>
+                    <p class="card-text">
+                        <strong>Movies: </strong>
+                        {% for movie in actor.movies.all %}
                         {{ movie.title }}
-                    {% endfor %}
-            </p>
-            {% if actor.alive %}
+                        {% endfor %}
+                    </p>
+                    {% if actor.alive %}
                     <div class="bg-info col-4 ml-auto rounded">
                         <h5 class="text-right text-white">ALIVE</h5>
                     </div>
-                {% else %}
+                    {% else %}
                     <div class="bg-dark col-4 ml-auto rounded">
                         <h5 class="text-right text-white">DEAD</h5>
                     </div>
-                {% endif %}
-        </div>
-        <div class="card-body ml-auto">
-            <a href="{% url 'intekimdb:actor_update' actor.id %}">
-                <div class="btn btn-primary">
-                    <h6 class="mb-0">Edit actor </h6>
+                    {% endif %}
                 </div>
-            </a>
-            <a href="{% url 'intekimdb:actor_delete' actor.id %}">
-                <div class="btn btn-danger">
-                    <h6 class="mb-0">Delete actor </h6>
+                <div class="card-body ml-auto justify-content-end d-flex">
+                    <a href="{% url 'intekimdb:actor_update' actor.id %}" class="mr-2">
+                        <div class="btn btn-primary">
+                            <h6 class="mb-0">Edit actor </h6>
+                        </div>
+                    </a>
+                    <a href="{% url 'intekimdb:actor_delete' actor.id %}">
+                        <div class="btn btn-danger">
+                            <h6 class="mb-0">Delete actor </h6>
+                        </div>
+                    </a>
                 </div>
-            </a>
+            </div>
         </div>
     </div>
 </div>

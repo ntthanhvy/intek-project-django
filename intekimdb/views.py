@@ -44,6 +44,7 @@ class ActorCreate(CreateView):
     '''
     form_class = ActorForm
     success_url = reverse_lazy('intekimdb:actor_list')  
+    template_name = 'intekimdb/actor_form.html'
 
 
 class ActorUpdate(UpdateView):

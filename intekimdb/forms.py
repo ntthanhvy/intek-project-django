@@ -6,7 +6,7 @@ class ActorForm(forms.ModelForm):
     
     class Meta:
         model = Actor
-        fields = ('firstname', 'lastname', 'birthday', 'sex', 'nationality', 'alive')
+        fields = ('firstname', 'lastname', 'birthday', 'sex', 'nationality', 'alive', 'portrait')
         widgets = {
             'birthday': forms.DateInput(format='%d/%m/%Y', attrs={'class': 'datepicker'}),
         }
@@ -19,7 +19,6 @@ class MovieForm(forms.ModelForm):
 
         widgets = {
             'release_date': forms.DateInput(format='%d/%m/%Y', attrs={'class': 'datepicker'}),
-            'actor': forms.Select()
         }
 
 
@@ -31,6 +30,6 @@ class AwardForm(forms.ModelForm):
 
         widgets = {
             'date': forms.DateInput(format='%d/%m/%Y', attrs={
-                'class': 'Datepicker'
+                'class': 'datepicker'
             })
         }

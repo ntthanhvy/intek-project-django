@@ -1,4 +1,8 @@
-{% extends "intekimdb/base.html" %}
+{% extends "home.html" %}
+{% load add_attr %}
+
+{% block title %}Awards{% endblock %}
+
 {% block head %}
 <script>
         $( function() {
@@ -34,14 +38,64 @@
       });
 </script>
 
-<form method="post">{% csrf_token %}
-        <p>{{ form.name }}</p>
-        <p>{{ form.kind }}</p>
-        <p>{{ form.movies }}</p>
-        <p>{{ form.actors }}</p>
-        <p>{{ form.date }}</p>
-        <input type="submit" value="Update">
+<div class="card border-0 bg-light">
+  <div class="card-body">
+    <h2 class="text-center mb-4">Edit award</h2>
+    <form method="post" enctype="multipart/form-data">{% csrf_token %}
+      <div class="form-group row">
+        <label for="id_title" class="col-sm-2 col-form-label">
+          Award name
+        </label>
+        <div class="col-sm-10">
+          {{ form.name|add_attr:"class:form-control" }}
+        </div>
+        {{ form.title.errors }}
+      </div>
+      <div class="form-group row">
+        <label for="id_kind" class="col-sm-2 col-form-label">
+          Kind
+        </label>
+        <div class="col-sm-10" height="20px">
+          {{ form.kind|add_attr:"class:form-control" }}
+        </div>
+        {{ form.description.errors }}
+      </div>
+      <div class="form-group row" id="id_movies">
+        <label for="id_movies" class="col-sm-2 col-form-label">
+          Movies: 
+        </label>
+        <div class="col-sm-10">
+          {{ form.movies|add_attr:"class:input-date form-control" }}
+        </div>
+        {{ form.movies.errors }}
+      </div>
+      <div class="form-group row" id="id_actors">
+        <label for="id_actors" class="col-sm-2 col-form-label">
+          Actors
+        </label>
+        <div class="col-sm-10">
+          {{ form.actors|add_attr:"class:form-control" }}
+        </div>
+        {{ form.actors.errors }}
+      </div>
+      <div class="form-group row">
+        <label for="id_date" class="col-sm-2 col-form-label">
+          Date: 
+        </label>
+        <div class="col-sm-10">
+          {{ form.date|add_attr:"class:form-control input-date col-6" }}
+        </div>
+        {{ form.date.errors }}
+      </div>
+      
+      <div class="row">
+        <button class="mt-5 btn btn-primary mx-auto col-sm-6">
+          <h4 class="mb-0 mx-auto">SAVE</h4>
+        </button>
+      </div>
     </form>
+  </div>
+</div>
 {% endblock %}   
 
 

@@ -7,10 +7,10 @@
     </div>
     <div class="row mt-4">
         {% for award in object_list %}
-            <div class="col-4 d-flex justify-content-center mb-3">
+            <div class="col-4 mb-3">
                 <div class="card">
                     <!-- <img src="{{ award.logo.url }}" alt="award_logo" class="card-img-top"> -->
-                    <div class="card-body">
+                    <div class="card-body" width="inherit">
                         <h3 class="card-title">{{ award.name }}</h3>
                         <p class="card-text">{{ award.kind }}</p>
                         <p class="card-text">

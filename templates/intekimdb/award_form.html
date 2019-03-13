@@ -3,17 +3,13 @@
 
 {% block title %}Awards{% endblock %}
 
-{% block head %}
-
-{% endblock %}
-
 
 {% block content %}
 
 
 <div class="card border-0 bg-light">
   <div class="card-body">
-    <h2 class="text-center mb-4">Add new Movie</h2>
+    <h2 class="text-center mb-4">Add new award</h2>
     <form method="post" enctype="multipart/form-data">{% csrf_token %}
       <div class="form-group row">
         <label for="id_title" class="col-sm-2 col-form-label">
@@ -68,9 +64,6 @@
     </form>
   </div>
 </div>
-{% endblock %}   
-
-{% block js %}
 <script>
   $(function() {
         $( "#id_actors" ).hide();
@@ -92,8 +85,14 @@
         });
     });
 </script>
+{% endblock %}   
 
-<script>
+{% block js %}
+
+{% endblock %}
+
+{% block head %}
+<script type="text/javascript">
   $(function() {
     $("#id_date").datepicker({
       changeMonth: true,
@@ -102,6 +101,7 @@
     });
   });
 </script>
+
 {% endblock %}
 
 

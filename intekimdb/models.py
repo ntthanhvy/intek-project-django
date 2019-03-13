@@ -23,9 +23,10 @@ class Actor(models.Model):
     """
     Actor model : Table for actor
     """
+    portrait = models.ImageField(upload_to='pic_folder/portrait/', default='pic_folder/no-img.jpg')
     firstname = models.CharField(max_length=50)
     lastname = models.CharField(max_length=50)
-    birthday = models.DateTimeField(default=now())
+    birthday = models.DateField(default=now())
     sex = models.CharField(max_length=6,
                            choices=(
                                ('Male', 'Male'),

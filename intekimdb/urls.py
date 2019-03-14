@@ -21,12 +21,8 @@ urlpatterns = [
     path('awards/<int:pk>/', views.AwardDetailView.as_view(), name='award_detail'),
     path('awards/<int:pk>/update/', views.AwardUpdate.as_view(), name='award_update'),
     path('awards/<int:pk>/delete/', views.AwardDelete.as_view(), name='award_delete'),
- 
-    # path('addactors/', views.AddActors.as_view(), name='addactors'),
-    # path('addmovies/', views.MovieCreate.as_view(), name='addmovies'),
-    # path('movies/', views.ViewMovies.as_view(), name='viewmovies'),
-    # path('movies/<int:pk>', views.DetailMovies.as_view(), name='detail'),
-    # path('movies/<int:pk>/update/', views.MovieUpdate.as_view(), name='movie_update'),
-    # path('movies/<int:pk>/delete/', views.AuthorDelete.as_view(), name='author_delete'),
+    path('comment/<int:pk>/<int:id>/delete/', views.CommentDelete.as_view(), name='comment_delete'),
+    path('comment/<int:pk>/<int:id>/update/', views.CommentUpdate.as_view(), name='comment_update'),
+
 ]
 

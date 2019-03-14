@@ -5,11 +5,48 @@ from django.urls import reverse_lazy
 
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormMixin
 from django.views.generic import TemplateView
 
-from .models import Movie, Actor, Award
-from .forms import ActorForm, MovieForm
+from .models import Movie, Actor, Award, Comment
+from .forms import ActorForm, MovieForm, CommentForm, CommentEditForm
+
+
+
+# -----------Comment view---------------
+class CommentDelete(DeleteView):
+    '''
+    Delete a comment
+    '''
+    model = Comment
+
+    def get_success_url(self):
+        if self.request.POST.get("movie_cmt"):
+            return reverse_lazy('intekimdb:movie_detail', kwargs={'pk': self.kwargs.get('id')})
+        elif self.request.POST.get("actor_cmt"):
+            return reverse_lazy('intekimdb:actor_detail', kwargs={'pk': self.kwargs.get('id')})
+        elif self.request.POST.get("award_cmt"):
+            return reverse_lazy('intekimdb:award_detail', kwargs={'pk': self.kwargs.get('id')})
+
+
+class CommentUpdate(UpdateView):
+    '''
+    View to update a specific comment
+    '''
+    model = Comment
+    form_class = CommentEditForm
+
+    def get_object(self, querys_set=None):
+        return Comment.objects.get(id=self.kwargs['pk'])
+
+    def get_success_url(self):
+        if self.request.POST.get("movie_cmt"):
+            return reverse_lazy('intekimdb:movie_detail', kwargs={'pk': self.kwargs.get('id')})
+        elif self.request.POST.get("actor_cmt"):
+            return reverse_lazy('intekimdb:actor_detail', kwargs={'pk': self.kwargs.get('id')})
+        elif self.request.POST.get("award_cmt"):
+            return reverse_lazy('intekimdb:award_detail', kwargs={'pk': self.kwargs.get('id')})
+        
 
 
 
@@ -27,15 +64,26 @@ class ActorListView(ListView):
         return context
 
 
-class ActorDetailView(DetailView):
+class ActorDetailView(DetailView, FormMixin):
     '''
     View detail of an actor
     '''
     model = Actor
+    form_class = CommentForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['comments'] = Actor.objects.get(pk=self.kwargs.get('pk')).comments.all()
+        context['edit_comment_form'] = CommentEditForm
         return context
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        p_object = Actor.objects.get(pk=self.kwargs.get('pk'))
+        
+        if form.is_valid():
+            form.save(p_object, request.user)
+            return redirect(reverse_lazy('intekimdb:actor_detail', kwargs={'pk': p_object.pk}))
 
 
 class ActorCreate(CreateView):
@@ -77,15 +125,28 @@ class MovieListView(ListView):
         return context
 
 
-class MovieDetailView(DetailView):
+class MovieDetailView(DetailView, FormMixin):
     '''
     View detail of a specific movie
     '''
     model = Movie
+    form_class = CommentForm
+
+    def get_success_url(self):
+        return reverse_lazy('intekimdb:movie_detail', kwargs={'pk': self.object.pk})
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+        context = super(MovieDetailView, self).get_context_data(**kwargs)
+        context['comments'] = Movie.objects.get(pk=self.kwargs.get('pk')).comments.all()
+        context['edit_comment_form'] = CommentEditForm
         return context
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        p_object = Movie.objects.get(pk=self.kwargs.get('pk'))
+        if form.is_valid():
+            form.save(p_object, request.user)
+            return redirect(reverse_lazy('intekimdb:movie_detail', kwargs={'pk': p_object.pk}))
 
 
 class MovieCreate(CreateView):
@@ -127,16 +188,26 @@ class AwardListView(ListView):
         return context
 
 
-class AwardDetailView(DetailView):
+class AwardDetailView(DetailView, FormMixin):
     '''
     View detail of a specidfic award
     '''
     model = Award
+    form_class = CommentForm
     template_name = 'intekimdb/award_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['comments'] = Award.objects.get(pk=self.kwargs.get('pk')).comments.all()
+        context['edit_comment_form'] = CommentEditForm
         return context
+    
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        p_object = Award.objects.get(pk=self.kwargs.get('pk'))
+        if form.is_valid():
+            form.save(p_object, request.user)
+            return redirect(reverse_lazy('intekimdb:award_detail', kwargs={'pk': p_object.pk}))
 
 
 class AwardCreate(CreateView):

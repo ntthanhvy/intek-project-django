@@ -5,11 +5,10 @@
     <div class="row justify-content-center mb-5">
         <h1 class="font-weight-bold text-uppercase">Awards</h1>
     </div>
-    <div class="card-deck">
+    <div class="row mt-4 d-flex justify-content-center">
         {% for award in object_list %}
-            <div class="col-4 mb-3">
+            <div class="col-9 mb-3">
                 <div class="card">
-                    <!-- <img src="{{ award.logo.url }}" alt="award_logo" class="card-img-top"> -->
                     <div class="card-body" width="inherit">
                         <h3 class="card-title">{{ award.name }}</h3>
                         <p class="card-text">{{ award.kind }}</p>
@@ -24,12 +23,12 @@
                             {% endfor %}
                         </p>
                         <p class="card-text">
-                            {{ award.date.date }}
+                            {{ award.date.year }}
                         </p>
-                        <a href="{% url 'intekimdb:award_detail' award.id %}" class="card-link">
-                            <p>>>Read more</p>
-                        </a>
                     </div>
+                    <a href="{% url 'intekimdb:award_detail' award.id %}" class="card-link card-footer">
+                        <p class="mb-0">>> Read more</p>
+                    </a>
                 </div>
             </div>
         {% empty %}

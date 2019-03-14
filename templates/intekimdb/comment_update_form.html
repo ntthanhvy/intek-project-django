@@ -1,0 +1,15 @@
+{% extends "home.html" %}
+{% load add_attr %}
+
+{% block title %}Movie{% endblock %}
+
+{% block head %}
+{% endblock %}  
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="OK">
+</form>
+{% endblock %}    

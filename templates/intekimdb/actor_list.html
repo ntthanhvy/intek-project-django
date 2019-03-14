@@ -9,11 +9,11 @@
 <div class="row justify-content-center mb-5">
     <h1 class="font-weight-bold text-uppercase">Actors</h1>
 </div>
-<div class="card-deck">
+<div class="row mb-3 mx-auto">
     {% for actor in object_list %}
     <div class="col-4">
         <div class="card mb-3">
-            <img src="{{ actor.portrait.url }}" class="card-img-top">
+            <img src="{{ actor.portrait.url }}" class="card-img-top img-ava">
             <div class="card-body">
                 <h2 class="card-title">
                     {{ actor.firstname}} {{ actor.lastname }}
@@ -21,21 +21,20 @@
                 <p class="card-text">
                     <strong>Gender:</strong> {{ actor.sex }}
                 </p>
-
-                {% if actor.alive %}
-                <div class="bg-info col-6 ml-auto rounded">
-                    <h5 class="text-right text-white">ALIVE</h5>
-                </div>
-                {% else %}
-                <div class="bg-dark col-6 ml-auto rounded">
-                    <h5 class="text-right text-white">DEAD</h5>
-                </div>
-                {% endif %}
+                <footer class="">
+                    {% if actor.alive %}
+                    <div class="bg-info col-6 ml-auto rounded">
+                        <h5 class="text-right text-white">ALIVE</h5>
+                    </div>
+                    {% else %}
+                    <div class="bg-dark col-6 ml-auto rounded">
+                        <h5 class="text-right text-white">DEAD</h5>
+                    </div>
+                    {% endif %}
+                </footer>
             </div>
             <a href="{% url 'intekimdb:actor_detail' actor.id %}" class="card-link card-footer">
-                <div class=>
-                    <p class="mb-0">> Read more</p>
-                </div>
+                <p class="mb-0">>> Read more</p>
             </a>
         </div>
     </div>
@@ -45,7 +44,7 @@
     <div class="col-3 ml-auto">
         <a href="{% url 'intekimdb:actor_create' %}">
             <div class="btn btn-success">
-                <h3 class="text-dark mb-0">ADD ACTOR</h3>
+                <h3 class="text-light mb-0">ADD ACTOR</h3>
             </div>
         </a>
     </div>

@@ -1,11 +1,22 @@
 {% extends 'base.html' %}
 
 {% load add_attr %}
+{% load static %}
 
 {% block title %}Login{% endblock %}
 
 
 {% block content %}
+<div class="row mb-3 d-flex justify-content-center">
+    <div class="col-6 d-flex justify-content-around align-items-center">
+        <div class="col-5">
+            <img src="{% static 'logo.svg' %}" alt="logo_page" class="card-img img-logo">
+        </div>
+        <div class="col-5">
+            <img src="{% static 'images.png' %}" alt="imdb_page" class="card-img img-logo">
+        </div>
+    </div>
+</div>
 <div class="row d-flex justify-content-center mt-5">
     <div class="col-6">
         <div class="card">
@@ -38,7 +49,7 @@
 </div>
 <div class="row justify-content-center mt-5">
     <div class="col-6">
-        <h5>Dont have account? <a href="{% url 'signup' %}">Signup</a></h5>
+        <h5>Dont have account? <a href="{% url 'account:signup' %}">Signup</a></h5>
     </div>
 </div>
 

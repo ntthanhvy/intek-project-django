@@ -7,8 +7,7 @@
     <title>
         {% block title%}Django Authentication{% endblock %}
     </title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
- 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
 
@@ -21,26 +20,20 @@
     {% block head %}{% endblock %}
 </head>
 <body class="bg-light">
-    <nav class="navbar fixed-top position-relative navbar-expand-lg navbar-light bg-secondary mb-4 px-5">
-        <div class="container col-9">
-            <a href="{% url 'home' %}" class="nav-link">
-                <img src="https://cdn.itviec.com/employers/intek-institute-of-applied-technology/logo/w170/ww5hEKU4Gqg385c6WkpmsdiN/intek-institute-of-applied-technology-logo.png" alt="logo" class="navbar-brand" width="60px">
-            </a>
-            {% block nav %}
-            {% endblock %}
-        </div>
-    </nav>
 
-    <div class="container-fluid my-3">
+    {% block nav %}
+    {% endblock %}
+
+    <div style="height: 150px"></div>
+    <main class="container flex-wrap">
         {% block content %}
+            
         {% endblock %}
-    </div>
+    </main>
 
-    <!-- <footer class="container mt-5" style="height: 50px">
-        <div class="text-muted text-center align-middle">
-            <p>C 2019 INTEKER</p>
-        </div>
-    </footer> -->
+    <footer class="container">
+        <p class="text-muted text-center mt-5" style="font-size: 13px">C 2019 INTEKER</p>
+    </footer>
     {% block js %}
     {% endblock %}
 </body>

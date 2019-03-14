@@ -10,6 +10,7 @@
 <div class="col-10 mx-auto">
     <div class="card">
         <div class="row no-gutters">
+
             <div class="col-4">
                 <img src="{{ actor.portrait.url }}"  class="card-img"> 
             </div>
@@ -25,19 +26,20 @@
                     <p class="card-text">
                         <strong>Nationality:</strong> {{ actor.nationality }}
                     </p>
-                    <p class="card-text">
-                        <strong>Movies: </strong>
-                        {% for movie in actor.movie_set.all %}
-                            {{ movie.title }}, 
-                        {% endfor %}
+                    <p class="card-text">Movies: 
+                        {% for i in actor.movie_set.all %}
+                        <a href="{% url 'intekimdb:movie_detail' i.id %}">
+                            {{ i.title }}
+                        </a>,
+                        {% endfor %}...
                     </p>
                     {% if actor.alive %}
                     <div class="bg-info col-4 ml-auto rounded">
-                        <h5 class="text-center text-white py-2">ALIVE</h5>
+                        <h5 class="text-right text-white">ALIVE</h5>
                     </div>
                     {% else %}
                     <div class="bg-dark col-4 ml-auto rounded">
-                        <h5 class="text-center text-white py-2">DEAD</h5>
+                        <h5 class="text-right text-white">DEAD</h5>
                     </div>
                     {% endif %}
                 </div>
@@ -55,6 +57,94 @@
                 <h6 class="mb-0">Delete actor </h6>
             </div>
         </a>
+    </div>
+</div>
+
+<!-- comment part -->
+<div class="col-8 mx-auto mt-4">
+    <div class="card">
+        <div class="card-body pb-0">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_entry_comment" class="col-4 col-form-label">Comment:</label>
+                    <div class="col-12">
+                        {{ form.entry_comment|add_attr:"class:form-control" }}
+                    </div>
+                    <div class="row col-12 mt-3">
+                        <input class="btn btn-primary col-3 ml-auto py-1 font-weight-bold" type="submit" value="Comment" style="font-size: 13px">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- list of comments -->
+    <div class="d-flex flex-column-reverse">
+        {% for comment in actor.comments.all %}
+        <div class="card mt-3">
+            <div class="card-body">
+                <blockquote class="blockquote mb-0" style="font-size: 17px">
+                    {{comment}}         
+                    <footer class="blockquote-footer">{{ comment.user }}</footer>
+                </blockquote>
+            </div>
+            <footer class="card-footer py-0" style="font-size: 13px">
+                <div class="col-12 d-flex justify-content-start"> 
+                    <button type="button" class="btn btn-default mr-2 text-muted px-1" data-toggle="modal" data-target="#myModal{{comment.id}}" style="font-size: 14px">Edit</button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal{{comment.id}}" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <form method='POST' action="{% url 'intekimdb:comment_update' comment.id actor.id %}">{% csrf_token %}
+                                    <div class="modal-body">
+                                        <div class="form-group row">
+                                            <label for="id_edit_comment_form" class="col-form-label col-sm-3">Edit comment: </label>
+                                            <div class="col-sm-8">
+                                                {{ edit_comment_form.entry_comment|add_attr:"class:form-control " }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default mr-auto" data-dismiss="modal">Close</button>
+                                        <input type="submit" class="btn btn-danger" value="Commit"  name="actor_cmt">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-default text-danger" data-toggle="modal" data-target="#myModal1{{comment.id}}" style="font-size: 14px">Delete</button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal1{{comment.id}}" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><strong>&times;</strong></button>
+                                </div>
+                                <form method='POST' action="{% url 'intekimdb:comment_delete' comment.id actor.id %}" >{% csrf_token %}
+                                    <div class="modal-body">
+                                        <h2 class="text-center">Are you sure?</h2>
+                                        
+                                    </div>
+                                    <div class="modal-footer d-flex justify-content-around">
+                                        <input type="submit" class="btn btn-danger py-1 col-3" value="Yes" name="actor_cmt">
+                                        <button type="button" class="btn btn-info py-1 col-3" data-dismiss="modal">No</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-muted mb-0 ml-auto align-self-center">
+                        {{ comment.release_date }}
+                    </p>
+                </div>
+            </footer>
+        </div>
+        {%endfor%}
     </div>
 </div>
 {% endif %}

@@ -83,5 +83,19 @@
         yearRange: "1900:2020",
       });
     } );
+    
+    $(function() {
+      var select = $('#id_category');
+      select.html(select.find('option').sort(function(x, y) {
+        return $(x).text() > $(y).text() ? 1 : -1;
+      }));
+      var select = $('#id_actors');
+      select.html(select.find('option').sort(function(x, y) {
+        return $(x).text() > $(y).text() ? 1 : -1;
+      }));
+    });
   </script>
+
+
+
 {% endblock %}
